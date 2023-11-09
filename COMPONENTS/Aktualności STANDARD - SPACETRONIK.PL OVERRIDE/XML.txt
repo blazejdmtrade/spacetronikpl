@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<iaixsl:variable name="main_news_date">true</iaixsl:variable>
+	<iaixsl:variable name="main_news_after_label"></iaixsl:variable>
+	<iaixsl:variable name="main_news_see_more"><iai:variable vid="Czytaj więcej"/></iaixsl:variable>
+	<iaixsl:variable name="main_news_view_all"></iaixsl:variable>
+
+	<iaixsl:if test="count(page/mainpage1/item) &gt; 0">
+		<section id="main_news" class="article mb-5">
+		  
+		  <div class="news-header-top-container">
+		    <div class="news-header-top-bottom-text-box">
+  			<h2>
+  				<a href="/news.php">
+  					<iaixsl:if test="/shop/page/mainpage1/@link and /shop/page/mainpage1/@link!=''">
+  						<iaixsl:attribute name="href"><iaixsl:value-of select="/shop/page/mainpage1/@link"/></iaixsl:attribute>
+  					</iaixsl:if>
+  					<iaixsl:attribute name="title"><iai:variable vid="Kliknij, by zobaczyć wszystkie aktualności"/></iaixsl:attribute>
+  					<span class="headline__name"><iai:variable vid="Aktualności"/></span>
+  					<iaixsl:if test="$main_news_after_label">
+  						<span class="headline__after"><iaixsl:value-of select="$main_news_after_label"/></span>
+  					</iaixsl:if>
+  				</a>
+  			</h2>
+  			</div>
+			</div>
+			
+			<div class="article__block">
+				<iaixsl:for-each select="page/mainpage1/item">
+					<article class="article__item article-single-item">
+
+						<!-- ZDJĘCIE -->
+						<iaixsl:if test="image/@src and image/@src!=''">
+							<iaixsl:choose>
+								<iaixsl:when test="(link/@href) != ''">
+									<iaixsl:text disable-output-escaping="yes"><![CDATA[&lt;a class="article__image_wrapper" href="]]></iaixsl:text>
+									<iaixsl:value-of select="link/@href"/><iaixsl:text disable-output-escaping="yes"><![CDATA[" ]]></iaixsl:text>
+								</iaixsl:when>
+								<iaixsl:otherwise>
+									<iaixsl:text disable-output-escaping="yes"><![CDATA[&lt;span class="article__image_wrapper" ]]></iaixsl:text>
+								</iaixsl:otherwise>
+							</iaixsl:choose>
+							<iaixsl:text disable-output-escaping="yes"><![CDATA[&gt;]]></iaixsl:text>
+
+							<img src="/gfx/pol/loader.gif?r=1642670052" class="article__image b-lazy">
+								<iaixsl:attribute name="width" ><iaixsl:value-of select="image/@width" /></iaixsl:attribute>
+								<iaixsl:attribute name="height" ><iaixsl:value-of select="image/@height" /></iaixsl:attribute>
+								<iaixsl:attribute name="data-src-small"><iaixsl:value-of disable-output-escaping="yes" select="image/@src"/></iaixsl:attribute>
+								<iaixsl:attribute name="data-src"><iaixsl:value-of disable-output-escaping="yes" select="image/@src"/></iaixsl:attribute>
+								<iaixsl:attribute name="alt"><iaixsl:value-of disable-output-escaping="yes" select="title/text()"/></iaixsl:attribute>
+							</img>
+
+							<iaixsl:choose>
+								<iaixsl:when test="(link/@href) != ''">
+									<iaixsl:text disable-output-escaping="yes"><![CDATA[&lt;/a&gt;]]></iaixsl:text>
+								</iaixsl:when>
+								<iaixsl:otherwise>
+									<iaixsl:text disable-output-escaping="yes"><![CDATA[&lt;/span&gt;]]></iaixsl:text>
+								</iaixsl:otherwise>
+							</iaixsl:choose>
+						</iaixsl:if>
+
+						<!-- DATA i NAZWA -->
+						<div class="article__date_name">
+							<iaixsl:if test="$main_news_date">
+								<div class="article__date datasquare"><iaixsl:value-of disable-output-escaping="yes" select="date"/></div>
+							</iaixsl:if>
+
+							<iaixsl:choose>
+								<iaixsl:when test="(link/@href) != ''">
+									<h3 class="article__name_wrapper">
+										<a class="article__name">
+											<iaixsl:attribute name="href"><iaixsl:value-of select="link/@href"/></iaixsl:attribute>
+											<iaixsl:attribute name="title"><iaixsl:value-of disable-output-escaping="yes" select="title"/></iaixsl:attribute>
+											<iaixsl:value-of disable-output-escaping="yes" select="title"/>
+										</a>
+									</h3>
+								</iaixsl:when>
+								<iaixsl:otherwise>
+									<iaixsl:if test="title != ''">
+										<h3 class="article__name_wrapper">
+											<span class="article__name"><iaixsl:value-of disable-output-escaping="yes" select="title"/></span>
+										</h3>
+									</iaixsl:if>
+								</iaixsl:otherwise>
+							</iaixsl:choose>
+						</div>
+
+						<!-- OPIS i LINK WIĘCEJ -->
+						<div class="article__text">
+							<iaixsl:if test="$main_news_date">
+								<iaixsl:attribute name="class"><![CDATA[article__text --date]]></iaixsl:attribute>
+							</iaixsl:if>
+							<div class="article__description"><iaixsl:value-of disable-output-escaping="yes" select="description"/></div>
+							<iaixsl:if test="more/@href and $main_news_see_more">
+								<div class="article__more">
+									<a class="article__more_link">
+										<iaixsl:attribute name="href"><iaixsl:value-of select="more/@href"/></iaixsl:attribute>
+										<iaixsl:attribute name="title"><iaixsl:value-of disable-output-escaping="yes" select="title"/></iaixsl:attribute>
+										<iaixsl:value-of select="$main_news_see_more"/>
+									</a>
+								</div>
+							</iaixsl:if>
+							<iaixsl:if test="$main_news_date">
+								<div class="article__date datasquare"><iaixsl:value-of disable-output-escaping="yes" select="date"/></div>
+							</iaixsl:if>
+						</div>
+					</article>
+				</iaixsl:for-each>
+				
+			
+			</div>
+
+			<!-- ZOBACZ WSZYSTKIE -->
+			<iaixsl:if test="$main_news_view_all">
+				<div class="article__all">
+					<a href="/news.php" class="article__all_link">
+						<iaixsl:if test="/shop/page/mainpage1/@link and /shop/page/mainpage1/@link!=''">
+							<iaixsl:attribute name="href"><iaixsl:value-of select="/shop/page/mainpage1/@link"/></iaixsl:attribute>
+						</iaixsl:if>
+						<iaixsl:attribute name="title"><iai:variable vid="Kliknij, by zobaczyć wszystkie aktualności"/></iaixsl:attribute>
+						<iaixsl:value-of select="$main_news_view_all"/>
+					</a>
+				</div>
+			</iaixsl:if>
+		</section>
+		
+		
+		
+		
+	</iaixsl:if>
+<cdata-end/></iai:componentsdata></iai:component>

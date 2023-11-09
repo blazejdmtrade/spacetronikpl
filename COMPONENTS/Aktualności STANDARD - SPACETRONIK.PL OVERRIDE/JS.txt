@@ -1,0 +1,15 @@
+$(function(){
+$('.article_wrapper .datasquare').each(function(){
+
+    var obj = $(this);
+    var txt = app_shop.fn.news_data( {
+        data:obj.text(),
+        month_names:iaical_shortNames,
+        format: '<div>%d</div><span>%m</span>'
+    });
+    if(txt)
+      obj.html( txt );
+});
+
+})
+//

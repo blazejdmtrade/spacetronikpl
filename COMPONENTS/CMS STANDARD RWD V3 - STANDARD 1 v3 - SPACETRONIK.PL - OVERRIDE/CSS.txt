@@ -1,0 +1,360 @@
+#main_cms {
+  margin-bottom: 0 !important;
+  overflow: visible;
+}
+
+.cms-section-1 {
+  margin-top: 90px;
+  margin-bottom: 120px;
+  display: block !important;
+  
+  h2 {
+    font-family: 'Inter';
+    font-size: 32px;
+    margin-bottom: 60px;
+    font-weight: bold;
+    letter-spacing: 0;
+    color: #000;
+  }
+  
+  .hotspot-image-products-container {
+    
+    .hotspot-image-background-box {
+      border-radius: 25px;
+      position: relative;
+      background-color: #F5F5F5;
+      
+      img {
+        border-radius: 25px;
+      }
+      
+      .hotspot-point-box {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_plus.svg);
+        background-position: 50% 50%;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        
+        .hotspot-rounded-point {
+          display: none;
+          position: absolute;
+          width: 45px;
+          height: 45px;
+          background-color: #fff;
+          border-radius: 50%;
+          cursor: pointer;
+          background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_minus.svg);
+          background-position: 50% 50%;
+          background-size: 50%;
+          background-repeat: no-repeat;
+          -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          z-index: 9;
+        }
+        .hotspot-product-description-box {
+          position: absolute;
+          display: none;
+          width: 634px;
+          height: 170px;
+          background-color: #fff;
+          left: 22px;
+          top: 22px;
+          border-radius: 25px;
+          -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+          
+          .hotspot-product-image-box {
+            width: 25%;
+            
+            img {
+              margin: 12px auto !important;
+              display: block;
+            }
+          }
+          
+          .hotspot-product-data-box {
+            width: 75%;
+            padding-top: 24px;
+            padding-left: 32px;
+            
+            .hotspot-product-description-title {
+              font-family: 'Inter';
+              font-size: 20px;
+              font-weight: bold;
+              line-height: 28px;
+              text-align: left;
+              color: #000;
+              width: 340px;
+              
+              a {
+                text-decoration: none;
+              }
+            }
+            
+            .hotspot-product-description-price {
+              font-size: 24px;
+              line-height: 24px;
+              font-weight: bold;
+              color: #7A428F;
+              width: 340px;
+              margin-top: 10px;
+              
+              .hotspot-product-description-price-from-text {
+                color: #000;
+                font-size: 18px;
+                font-weight: 400;
+              }
+            }
+          }
+          
+        }
+      }
+      
+      
+      .show-hotspot {
+        background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_minus.svg);
+        .hotspot-product-description-box {
+          display: flex;
+          justify-content: space-between;
+        }
+        .hotspot-rounded-point {
+          display: block;
+        }
+        }
+      
+      #hotspot-point-1 {
+        left: 673px;
+        top: 228px;
+      }
+      
+      #hotspot-point-2 {
+        left: 1100px;
+        top: 203px;
+      }
+      
+      #hotspot-point-3 {
+        left: 952px;
+        top: 535px;
+      }
+      
+      #hotspot-point-4 {
+        left: 632px;
+        top: 775px;
+      }
+    }
+    
+  }
+  
+  .cms-1-commercial-boxes-container {
+    margin-top: 120px; 
+    margin-bottom: 120px;
+    
+    .commercial-3-commercial-box {
+      display: flex;
+      justify-content: space-between;
+      
+      .commercial-3-left-side-content {
+        width: calc(51% - 12px);
+        margin-right: 12px;
+        
+        .commercial-3-1-single-box {
+          background-color: #F5F5F5;
+          width: 100%;
+          height: 588px;
+          border-radius: 25px;
+          position: relative;
+          padding: 30px;
+          
+          
+          .commercial-3-1-box-background {
+              position: absolute;
+              top: -20px;
+              right: -20px;
+              z-index: 0;
+          }
+          
+          .commercial-3-1-single-box-title {
+            margin-top: 208px;
+            font-family: 'Inter';
+            font-size: 48px;
+            line-height: 58px;
+            letter-spacing: 0;
+            font-weight: bold;
+            color: #000;
+            width: 530px;
+            position: relative;
+          }
+          
+          .commercial-3-1-single-box-content {
+            margin-top: 28px;
+            position: relative;
+            p {
+              font-family: 'Inter';
+              font-weight: 400;
+              font-size: 16px;
+              letter-spacing: 0;
+              line-height: 24px;
+            }
+            
+          }
+          
+          .commercial-3-1-box-btn {
+            position: absolute;
+            border: 1px solid #000;
+            border-radius: 50px;
+            width: 300px;
+            text-align: center;
+            height: 50px;
+            background-color: #fff;
+            right: 32px;
+            bottom: 48px;
+            
+            a {
+                font-size: 18px;
+                font-weight: bold;
+                line-height: 50px;
+                letter-spacing: 0;
+                font-family: 'Inter';
+                text-decoration: none;
+            }
+          }
+        }
+      }
+      
+      .commercial-3-right-side-content {
+        width: 50%;
+        
+        .commercial-3-2-single-box {
+          background-color: #F5F5F5;
+          width: 100%;
+          height: 288px;
+          border-radius: 25px;
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          padding: 32px;
+          overflow: hidden;
+          
+          &:nth-of-type(1){
+            margin-bottom: 12px;
+          }
+          
+          .commercial-3-2-left-side-content {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            
+            .commercial-3-2-single-box-title {
+                font-family: 'Inter';
+                font-size: 32px;
+                line-height: 42px;
+                letter-spacing: 0;
+                font-weight: bold;
+                color: #000;
+            }
+            
+            .commercial-3-2-box-btn {
+              position: absolute;
+              border: 1px solid #000;
+              border-radius: 50px;
+              width: 300px;
+              text-align: center;
+              height: 50px;
+              background-color: #fff;
+              right: 52px;
+              bottom: 16px;
+              
+              a {
+                  font-size: 18px;
+                  font-weight: bold;
+                  line-height: 50px;
+                  letter-spacing: 0;
+                  font-family: 'Inter';
+                  text-decoration: none;
+              }
+            }
+            
+          }
+          .commercial-3-2-right-side-content {
+             width: 50%;
+             position: relative;
+             
+             .commercial-3-2-image {
+               position: absolute;
+               top: -50px;
+               right: -50px;
+             }
+          }
+        }
+        
+      }
+    }
+  }
+  
+}
+
+
+@media (max-width: 978px) {
+    .cms-section-1 {
+    .hotspot-image-products-container {
+      display: none !important;
+    }
+    
+    .cms-1-commercial-boxes-container {
+      .commercial-3-commercial-box {
+        flex-wrap: wrap;
+        .commercial-3-left-side-content {
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 20px;
+          
+          
+          .commercial-3-1-single-box {
+            .commercial-3-1-single-box-title {
+                font-size: 38px;
+                line-height: 48px;
+            }
+            
+            .commercial-3-1-single-box-content {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                white-space: pre-wrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+          }
+        }
+        .commercial-3-right-side-content {
+          width: 100%;
+          
+          .commercial-3-2-single-box:nth-of-type(1) {
+            margin-bottom: 20px;
+          }
+          
+          .commercial-3-2-left-side-content {
+            
+            .commercial-3-2-single-box-title {
+                font-size: 26px !important;
+                line-height: 32px !important;
+            }
+            
+            .commercial-3-2-box-btn {
+              left: 0;
+              z-index: 9999;
+            }
+          }
+          
+        }
+      }
+    }
+  }
+}
+

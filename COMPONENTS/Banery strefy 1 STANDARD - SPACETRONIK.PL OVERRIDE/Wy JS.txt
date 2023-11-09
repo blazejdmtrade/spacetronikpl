@@ -1,0 +1,84 @@
+/**
+ * Funkcja obsługująca slider w #main_banner1
+ * @param {object} params - obiekt z wszystkimi callback'ami
+*/
+MainSlider = function MainSlider(params) {
+  const that = this;
+  this.params = params || {};
+
+  /* Obiekt z domyślnymi ustawieniami slidera */
+  this.defaults = {
+    autoplay: true,
+    adaptiveHeight: true,
+    prevArrow: '<a class="slick-prev" href=""><i class="icon-angle-left"></i></a>',
+    nextArrow: '<a class="slick-next" href=""><i class="icon-angle-right"></i></a>',
+    autoplaySpeed: 5000,
+    arrows: false,
+  };
+
+  /* Ponowne odpalenie slidera */
+  this.reset = () => {
+    if (this.slider) this.slider.slick('unslick');
+    this.init(this.params);
+  };
+
+  /* Wyłączenie slidera */
+  this.destroy = () => {
+    if (this.slider) this.slider.slick('unslick');
+  };
+
+  /* Funkcja inicująca */
+  this.init = () => {
+    const {
+      selector,
+      options,
+      callbackBefore,
+      callbackAfter,
+    } = this.params;
+
+    // Połącznie parametrów domyślnych i indywidualnych
+    this.settings = _objectSpread({}, this.defaults, {}, options);
+    this.selector = selector;
+    this.slider = $(selector);
+
+    // Callback przed wywołaniem slidera
+    if (typeof callbackBefore === 'function') callbackBefore(this.slider);
+
+    // Odpalenie slicka
+    this.slider.slick(this.settings);
+
+    // Callback po wywołaniem slidera
+    if (typeof callbackAfter === 'function') callbackAfter(this.slider);
+  };
+};
+
+app_shop.run(function mainSliderAppShop() {
+  app_shop.fn.mainSlider = new MainSlider({
+    selector: '.main_slider:not(.slick-initialized)',
+    callbackBefore: (slider) => {
+      slider.on('afterChange', () => {
+        // Załadowanie zdjęcia
+        if (document.querySelector('#main_banner1 .slick-active img:not(.b-loaded)')) app_shop.vars.bLazy.revalidate();
+      });
+    },
+  });
+  const firstImgElement = document.querySelector('#main_banner1 .main_slider__item:first-child img.loaded');
+  // Inicjalizacja po załadowaniu pierwszego zdjęcia
+  const initMainSlider = () => {
+    const skeletonElement = document.querySelector('#main_banner1.skeleton');
+    if (skeletonElement) {
+      // Usunięcie skeleton
+      skeletonElement.classList.remove('skeleton');
+      // Odpalenie slidera
+      app_shop.fn.mainSlider.init();
+    }
+  };
+  // Poczekanie na załadowanie pierwszego zdjęcia
+  if (firstImgElement && firstImgElement.complete) {
+    initMainSlider();
+  } else if (firstImgElement) {
+    firstImgElement.addEventListener('load', initMainSlider);
+  } else {
+    initMainSlider();
+  }
+}, 'all', '#main_banner1');

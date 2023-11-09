@@ -1,0 +1,48 @@
+#main_banner1 {
+  width: 100vw;
+    position: relative;
+    margin-left: -50vw;
+    left: 50%;
+    
+	&.skeleton {
+		background: @less_iaicolorscheme_background_alternative_color;
+
+		.main_slider {
+			&__item {
+				display: none;
+
+				&:first-child {
+					display: block;
+				}
+			}
+		}
+	}
+
+	.main_slider__item a {
+		display: flex;
+		justify-content: center;
+	}
+
+	&.skeleton .main_slider__item a,
+	.main_slider__item a.loading {
+		.aspectRatio();
+	}
+}
+
+@media (max-width: 978px) {
+  #main_banner1 {
+    padding-top: 139px;
+  }
+}
+
+@media (max-width: 756px) {
+  #main_banner1 {
+    padding-top: 155px;
+  }
+}
+
+
+
+
+
+

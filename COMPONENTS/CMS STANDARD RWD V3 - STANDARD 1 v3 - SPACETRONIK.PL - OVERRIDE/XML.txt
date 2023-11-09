@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+            <iaixsl:if test="page/text[@id='13']">
+                <iaixsl:for-each select="page/text[@id='13']">
+                    <div class="cm mb-4" id="main_cms">
+                        <iaixsl:value-of disable-output-escaping="yes" select="body"/>
+                    </div>
+                </iaixsl:for-each>
+            </iaixsl:if>
+        <cdata-end/></iai:componentsdata></iai:component>

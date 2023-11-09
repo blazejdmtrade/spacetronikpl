@@ -1,0 +1,18 @@
+app_shop.fn.fontCallback = () => {
+   typeof app_shop.fn.fontCallbackMenu != 'undefined' ? app_shop.fn.fontCallbackMenu() : '';
+};
+
+WebFontConfig = {
+    google: { families: [ 'Open+Sans:400,600,700:latin,latin-extt&display=swap' , 'Poppins:400,500,600,700:latin,latin-extt&display=swap' , 'Inter:100;200;300;400;500;600;700;800;900&display=swap' ] },
+    active: app_shop.fn.fontCallback
+};
+(function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+})();
+    
+    

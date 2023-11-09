@@ -1,0 +1,675 @@
+span.menu_settings_language {
+	text-transform: uppercase;
+	margin-right: 3px;
+}
+
+span.menu_settings_currency {
+	margin-left: 3px;
+}
+
+
+.login-box-link {
+  &:before {
+	      content: '';
+	      background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_login.svg);
+        width: 30px;
+        height: 30px;
+        background-position: 50% 50%;
+        background-size: cover;
+        display: inline-block;
+	    }
+	}
+
+#menu_settings {
+	display: flex;
+	margin: 0 0 150px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	grid-area: menu_settings;
+
+	@media (min-width: 979px) {
+		margin: 0;
+		font-size: 1.3rem;
+		z-index: 200;
+		position: relative;
+	}
+
+	.f-dropdown {
+		.f-control {
+			@media (max-width: 978px) {
+				border-radius: 0;
+				border: 1px solid transparent;
+				border-bottom: 1px solid @less_iaicolorscheme_background_border_color;
+			}
+		}
+
+		.f-dropdown-item {
+			@media (min-width: 979px) {
+				padding: 1rem;
+			}
+		}
+	}
+
+	form {
+		width: 100%;
+		display: block;
+		border: none;
+		background: @less_iaicolorscheme_background_color;
+
+		@media (min-width: 757px) {
+			width: 50vw;
+		}
+
+		@media (min-width: 979px) {
+			position: absolute;
+			top: 100%;
+			width: auto;
+			left: 0;
+			bottom: initial;
+			display: none;
+			background: none;
+			overflow: visible;
+			min-width: 190px;
+
+			&.active {
+				display: block;
+			}
+		}
+
+		& > ul {
+			list-style: none;
+
+			@media (min-width: 979px) {
+				padding: 20px 0;
+				border-radius: @less_iaicolorscheme_border_radius_value_sm;
+				background: @less_iaicolorscheme_background_color;
+				box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+				border-radius: @less_iaicolorscheme_border_radius_value_sm;
+			}
+
+			& > li {
+				@media (min-width: 979px) {
+					padding: 0 15px;
+				}
+
+				&:nth-last-child(2) {
+					margin-bottom: 60px;
+
+					@media (min-width: 979px) {
+						margin-bottom: 0;
+					}
+				}
+
+				&.buttons {
+					width: ~'calc(100vw - 90px)';
+					position: fixed;
+					bottom: 0;
+					padding-bottom: env(safe-area-inset-bottom);
+					background: @less_iaicolorscheme_background_color;
+					right: 1.5rem;
+					display: none;
+					z-index: 1;
+
+					@media (min-width: 757px) {
+					  width: ~'calc(50vw - 30px)';
+					}
+
+					@media (min-width: 979px) {
+						width: auto;
+						position: static;
+						padding-top: 10px;
+						display: block;
+						background: transparent;
+					}
+
+					button {
+						width: 100%;
+						margin-bottom: 1.5rem;
+
+						@media (min-width: 979px) {
+							.btn_small();
+							.btn_small_button();
+							margin-bottom: 0;
+						}
+					}
+				}
+			}
+		}
+
+		input[type="radio"] {
+			position: static;
+			margin: 0 10px 0 0;
+		}
+	}
+
+	&.--active {
+		form {
+			& > ul {
+				& > li {
+					&.buttons {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.form-group {
+		margin: 0;
+		padding-top: 10px;
+
+		@media (min-width: 979px) {
+			padding-top: 0;
+		}
+
+		& > label {
+			display: block;
+			line-height: 40px;
+			position: relative;
+			border-bottom: 1px solid @less_iaicolorscheme_background_border_color;
+			font-size: 16px;
+			font-weight: 600;
+
+			@media (min-width: 979px) {
+				font-size: 1em;
+				line-height: inherit;
+				border: none;
+				text-align: left;
+				display: inline-block;
+				font-weight: 400;
+			}
+		}
+	}
+	
+	
+	.open_trigger {
+		white-space: nowrap;
+		cursor: pointer;
+		text-align: right;
+		display: none;
+		padding: 0;
+		width: 100%;
+
+		@media (min-width: 979px) {
+			line-height: 45px;
+			padding-right: 15px;
+			width: auto;
+			display: block;
+		}
+
+		
+		.flag_txt {
+		  font-size: 0;
+		  
+		  &:before {
+		    content: '';
+        background-image: url("https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_globe.svg");
+        width: 30px;
+        height: 30px;
+        background-position: 50% 50%;
+        background-size: cover;
+        display: inline-block;
+        
+        
+
+        display: none !important; 
+		  }
+		}
+	}
+	
+	.open_trigger {
+		white-space: nowrap;
+		cursor: pointer;
+		text-align: right;
+		display: none;
+		padding: 0;
+		width: 100%;
+
+		@media (min-width: 979px) {
+			line-height: 45px;
+			padding-right: 15px;
+			width: auto;
+			display: block;
+		}
+
+		.flag-txt {
+		  font-size: 0;
+		  
+		}
+	}
+
+	.menu_settings_wrapper {
+		text-align: left;
+		align-items: center;
+		position: relative;
+		margin-top: .5rem;
+	}
+
+	.menu_settings_inline {
+		position: relative;
+		border-bottom: 1px solid @less_iaicolorscheme_background_border_color;
+		padding: 1.5rem 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+
+		&:after {
+			content: "\f105";
+			font-family: FontAwesome;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 22px;
+		}
+	}
+
+	.menu_settings_inline:last-child {
+		border-bottom: none;
+	}
+
+	.menu_settings_header {
+		font-size: 11px;
+		margin-right: 4px;
+	}
+
+	.menu_settings_content {
+		font-size: 12px;
+	}
+
+	.menu_settings_flag {
+		margin: 0 8px 0 0;
+		vertical-align: middle;
+	}
+
+	.menu_settings_lang_label {
+		display: none;
+	}
+
+	.radio {
+		margin: 0;
+
+		label {
+			border-bottom: 1px solid @less_iaicolorscheme_background_border_color;
+			font-size: 1em;
+			padding: 0 20px;
+			display: flex;
+			align-items: center;
+			line-height: 60px;
+			text-transform: uppercase;
+
+			@media (min-width: 979px) {
+				line-height: 35px;
+			}
+		}
+	}
+
+	.select-after {
+		position: relative;
+
+		&:before {
+			content: "\f107";
+			font-family: FontAwesome;
+			position: absolute;
+			top: 50%;
+			right: 20px;
+			transform: translateY(-50%);
+			font-size: 24px;
+			pointer-events: none;
+
+			@media (min-width: 979px) {
+				display: none;
+			}
+		}
+	}
+}
+
+#menu_additional {
+	display: none;
+	
+	a {
+	  text-decoration: none;
+	  font-size: 16px;
+	  font-weight: 400;
+	  color: #000;
+	  position: relative;
+	  top: -8px;
+    margin-left: 15px;
+	}
+
+	@media (min-width: 979px) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	@media (min-width: 1200px) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+.shopping_list_top {
+	z-index: 1;
+	position: relative;
+	
+	&:before {
+	  content: '';
+    background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_heart.svg);
+    width: 30px;
+    height: 30px;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+	}
+
+	@media (min-width: 1200px) {
+		margin-left: 2rem;
+	}
+
+	&:hover {
+		.slt_link {
+			&:after {
+				// content: '\F106';
+			}
+		}
+
+		.slt_lists {
+			display: block;
+		}
+	}
+
+	&[data-empty="false"] {
+		.slt_lists__nav_item.--empty {
+			display: none;
+		}
+	}
+
+	.slt_link {
+	  
+		// &:after {
+		// 	content: '\F107';
+		// 	font-family: FontAwesome;
+		// 	text-decoration: none;
+		// 	display: inline-block;
+		// 	margin-left: 0.3rem;
+		// }
+	}
+	
+	
+
+	.slt_lists {
+		display: none;
+		position: absolute;
+		background: @less_iaicolorscheme_background_color;
+		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+		border-radius: @less_iaicolorscheme_border_radius_value_sm;
+		padding: 7rem 2.5rem 1.5rem;
+		top: -2rem;
+		left: -2.5rem;
+		z-index: -1;
+		min-width: 230px;
+		max-width: 300px;
+
+		&__nav {
+			list-style: none
+		}
+
+		&__nav_item {
+			border-bottom: 1px solid @less_iaicolorscheme_background_border_color;
+
+			&:last-child {
+				border: none;
+			}
+
+			&[data-current] {
+				.slt_lists__nav_link {
+					font-weight: bold;
+				}
+			}
+
+			&[data-shared] {
+				.slt_lists__nav_link {
+					&:after {
+						content: '\E896';
+						font-family: FontAwesome;
+						font-weight: normal;
+						font-size: 1.1rem;
+						margin-left: 0.5rem;
+					}
+				}
+			}
+		}
+
+		&__nav_link {
+			display: flex;
+			align-items: center;
+			padding: 1rem 0;
+			color: @link_color_hover;
+			font-size: 1.2rem;
+			white-space: nowrap;
+			text-decoration: none;
+
+			@media (min-width: 1200px) {
+				min-width: 215px;
+			}
+
+			&:hover {
+				color: @link_color;
+			}
+
+			&:before {
+				content: '\E881';
+				font-family: FontAwesome;
+				font-weight: normal;
+				font-size: 1.6rem;
+				margin-right: 1rem;
+			}
+		}
+
+		&__nav_name {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
+		&__count {
+			margin-left: 0.3rem;
+
+			&:before {
+				content: '(';
+			}
+
+			&:after {
+				content: ')';
+			}
+		}
+
+		&__empty {
+			display: none;
+			font-size: 1.2rem;
+		}
+	}
+}
+
+header #menu_settings {
+	display: none !important;
+
+	@media (min-width: 979px) {
+		display: flex !important;
+	}
+}
+
+.flag {
+	display: inline-block;
+	width: 20px;
+	height: 14px;
+	vertical-align: middle;
+	margin-right: 10px;
+	background: no-repeat scroll;
+	background-size: cover;
+	background-position-y: center;
+
+	&_txt {
+		font-size: 1.1em;
+		font-weight: bold;
+		padding-right: 5px;
+		vertical-align: middle;
+	}
+
+	&_alb {
+		background-image: url('/gfx/standards/alb.svg');
+	}
+
+	&_arm {
+		background-image: url('/gfx/standards/arm.svg');
+	}
+
+	&_aze {
+		background-image: url('/gfx/standards/aze.svg');
+	}
+
+	&_bel {
+		background-image: url('/gfx/standards/bel.svg');
+	}
+
+	&_bos {
+		background-image: url('/gfx/standards/bos.svg');
+	}
+
+	&_bul {
+		background-image: url('/gfx/standards/bul.svg');
+	}
+
+	&_cze {
+		background-image: url('/gfx/standards/cze.svg');
+	}
+
+	&_dan {
+		background-image: url('/gfx/standards/dan.svg');
+	}
+
+	&_dut {
+		background-image: url('/gfx/standards/dut.svg');
+	}
+
+	&_eng {
+		background-image: url('/gfx/standards/eng.svg');
+	}
+
+	&_est {
+		background-image: url('/gfx/standards/est.svg');
+	}
+
+	&_fin {
+		background-image: url('/gfx/standards/fin.svg');
+	}
+
+	&_fre {
+		background-image: url('/gfx/standards/fre.svg');
+	}
+
+	&_geo {
+		background-image: url('/gfx/standards/geo.svg');
+	}
+
+	&_ger {
+		background-image: url('/gfx/standards/ger.svg');
+	}
+
+	&_gre {
+		background-image: url('/gfx/standards/gre.svg');
+	}
+
+	&_hun {
+		background-image: url('/gfx/standards/hun.svg');
+	}
+
+	&_ice {
+		background-image: url('/gfx/standards/ice.svg');
+	}
+
+	&_ita {
+		background-image: url('/gfx/standards/ita.svg');
+	}
+
+	&_kaz {
+		background-image: url('/gfx/standards/kaz.svg');
+	}
+
+	&_lav {
+		background-image: url('/gfx/standards/lav.svg');
+	}
+
+	&_lit {
+		background-image: url('/gfx/standards/lit.svg');
+	}
+
+	&_ltz {
+		background-image: url('/gfx/standards/ltz.svg');
+	}
+
+	&_mac {
+		background-image: url('/gfx/standards/mac.svg');
+	}
+
+	&_mlt {
+		background-image: url('/gfx/standards/mlt.svg');
+	}
+
+	&_mol {
+		background-image: url('/gfx/standards/mol.svg');
+	}
+
+	&_nor {
+		background-image: url('/gfx/standards/nor.svg');
+	}
+
+	&_pol {
+		background-image: url('/gfx/standards/pol.svg');
+	}
+
+	&_por {
+		background-image: url('/gfx/standards/por.svg');
+	}
+
+	&_rum {
+		background-image: url('/gfx/standards/rum.svg');
+	}
+
+	&_rus {
+		background-image: url('/gfx/standards/rus.svg');
+	}
+
+	&_scc {
+		background-image: url('/gfx/standards/scc.svg');
+	}
+
+	&_scr {
+		background-image: url('/gfx/standards/scr.svg');
+	}
+
+	&_slo {
+		background-image: url('/gfx/standards/slo.svg');
+	}
+
+	&_slv {
+		background-image: url('/gfx/standards/slv.svg');
+	}
+
+	&_spa {
+		background-image: url('/gfx/standards/spa.svg');
+	}
+
+	&_swe {
+		background-image: url('/gfx/standards/swe.svg');
+	}
+
+	&_tur {
+		background-image: url('/gfx/standards/tur.svg');
+	}
+
+	&_ukr {
+		background-image: url('/gfx/standards/ukr.svg');
+	}
+}

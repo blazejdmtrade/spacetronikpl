@@ -1,0 +1,75 @@
+app_shop.run(() => {
+  app_shop.fn.selectPaging = new SelectToDropdown({
+    selector: '#menu_settings  select.form-control:not(.f-dropdown)',
+    generateDropdownCallback: (dropdown) => {
+      dropdown.classList.remove('form-control');
+    },
+  });
+
+  const formElement = document.querySelector('#menu_settings form');
+  if (!formElement) return;
+  const openTriggerElement = document.querySelector('#menu_settings .open_trigger');
+  if (!openTriggerElement) return;
+  openTriggerElement.addEventListener('click', () => {
+    formElement.classList.toggle('active');
+  });
+}, 'all', '#menu_settings');
+
+const DefaultShoppingList = function DefaultShoppingList() {
+  this.vars = {
+    firstListName: 'Lista zakupowa', // <iai:variable vid="Lista zakupowa"/>,
+  };
+
+  this.queries = {
+    addList: () => JSON.stringify({
+      query: `mutation {
+        shoppingListCreate(ShoppingListSettingsInput: {
+          name: "${this.vars.firstListName}",
+        }) {
+          status
+          id
+        }
+      }`,
+    }),
+  };
+
+  this.fetchData = async (dataFetch) => {
+    try {
+      const response = await fetch('/graphql/v1/?query=createShoppingList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: dataFetch,
+      });
+      await app_shop.graphql.trackingEvents(response);
+      const dataJson = await response.json();
+      return dataJson;
+    } catch (error) {
+      console.error('AJAX fetchDataShoppingList() Error:', error);
+      return false;
+    }
+  };
+
+  this.createList = async () => {
+    await this.fetchData(this.queries.addList());
+  };
+
+  this.initEvents = () => {
+    document.addEventListener('click', async (e) => {
+      const { target } = e;
+      if (target.closest('.slt_link.--empty, .slt_lists__nav_link.--empty, .slm_lists__nav_link.--empty')) {
+        e.preventDefault();
+        await this.createList();
+        window.location.href = target.closest('[href]')?.href;
+      }
+    });
+  };
+
+  return this.initEvents();
+};
+
+app_shop.run(function defaultShoppingList() {
+  app_shop.fn.defaultShoppingList = new DefaultShoppingList();
+}, 'all', '.slt_link.--empty, .slt_lists__nav_link.--empty, .slm_lists__nav_link.--empty');

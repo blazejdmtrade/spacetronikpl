@@ -1,0 +1,203 @@
+@freeShipping_height_mobile: 58px;
+
+header {
+  padding-top: 78px;
+  
+  @media (max-width: 978px) {
+    padding-top: 38px;
+  }
+}
+
+.freeShipping {
+	position: relative;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	left: env(safe-area-inset-left);
+	right: env(safe-area-inset-right);
+	height: 3.8rem;
+	border: 1px solid #D81D1D;
+	color: #D81D1D;
+	border-radius: @less_iaicolorscheme_border_radius_value_xs;
+	font-size: 1.3rem;
+	margin: 1rem 1.5rem;
+	padding: .3rem 2.2rem .3rem 2.8rem;
+	grid-area: freeShipping;
+
+	@media (min-width: 757px) {
+		padding-right: 0;
+		height: 3.6rem;
+	}
+
+	@media (min-width: 979px) {
+		width: ~'calc(100% - 0rem)';
+		margin: 1rem 0 .3rem;
+		top: 0;
+		padding-left: 3.2rem;
+		position: relative;
+	}
+
+	&__info {
+		text-transform: uppercase;
+
+		&:before {
+			content: '\E883';
+			font-family: fontawesome;
+			font-size: 2.1rem;
+			position: absolute;
+			top: 50%;
+			transform: translate(~'calc(-100% - 0.8rem)', -50%);
+		}
+	}
+
+	&__val {
+		margin-left: .5rem;
+	}
+
+	&__return {
+		margin-left: .5rem;
+
+		@media (max-width: 756px) {
+			min-width: 100%;
+			text-align: center;
+		}
+	}
+
+	&__close {
+		position: absolute;
+		color: #D81D1D;
+		right: 1.5rem;
+		font-size: 1.8rem;
+		text-decoration: none;
+
+		&:after {
+			content: '\E880';
+			font-family: fontawesome;
+			font-weight: bold;
+		}
+	}
+
+	&__val,
+	&__info,
+	&__return {
+		line-height: 1.4rem;
+		letter-spacing: 0.12rem;
+
+		@media (min-width: 757px) {
+			line-height: 1.5rem;
+		}
+	}
+}
+
+.black-free-shipping-bar {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    margin-left: -50vw;
+    left: 50%;
+    background-color: #000;
+    height: 78px;
+    
+    
+    #black-free-shipping-bar-slider {
+      .free-shipping-info-box {
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 78px;
+        letter-spacing: 0px;
+        font-family: 'Inter';
+        
+        &:after {
+          content: '';
+          background-image: url(https://spacetronik.store/data/include/cms/grafika/SpacetronikPl/icons/icon_truck.svg);
+          background-position: 50% 50%;
+          background-size: cover;
+          display: inline-block;
+          width: 40px;
+          height: 35px;
+          position: relative;
+          left: 15px;
+          top: 9px;
+        }
+      }
+    }
+}
+
+
+html.--freeShipping:not(.order_process) #container:not(.payment_tunnel) {
+	.freeShipping {
+		display: flex;
+	}
+}
+
+@media (max-width: 978px) {
+	html.--freeShipping:not(.order_process) {
+		body {
+			padding-top: (@header_height_mobile + @freeShipping_height_mobile);
+		}
+	}
+
+	html.--rabateCode.--freeShipping:not(.order_process) {
+		body {
+			padding-top: (@header_height_mobile + @freeShipping_height_mobile + @rabateCode_height_mobile);
+		}
+	}
+
+	html.--scroll-down.--freeShipping:not(.order_process) {
+		#container:not(.payment_tunnel) {
+			.freeShipping {
+				display: none;
+			}
+		}
+	}
+	
+	.black-free-shipping-bar {
+	  height: 38px;
+
+    #black-free-shipping-bar-slider {
+      .free-shipping-info-box {
+        font-size: 12px;
+        line-height: 38px;
+        letter-spacing: 0px;
+        font-family: 'Inter';
+        
+        &:after {
+          width: 20px;
+          height: 18px;
+          left: 15px;
+          top: 5px;
+        }
+      }
+    }
+}
+	
+	
+}
+
+@media (max-width: 756px) {
+	html.--freeShipping:not(.--search-open) {
+		.main_page {
+			#menu_search {
+				.menu_search__item {
+					&.--results {
+						height: ~"calc((var(--vh, 1vh) * 100) - ("(@header_height_mobile + @freeShipping_height_mobile) ~" + 60px))";
+					}
+				}
+			}
+		}
+	}
+
+	html.--rabateCode.--freeShipping:not(.--search-open) {
+		.main_page {
+			#menu_search {
+				.menu_search__item {
+					&.--results {
+						height: ~"calc((var(--vh, 1vh) * 100) - ("(@header_height_mobile + @freeShipping_height_mobile + @rabateCode_height_mobile) ~" + 60px))";
+					}
+				}
+			}
+		}
+	}
+}

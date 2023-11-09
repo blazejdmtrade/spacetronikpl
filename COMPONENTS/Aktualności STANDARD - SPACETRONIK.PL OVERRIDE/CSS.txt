@@ -1,0 +1,497 @@
+#main_news {
+  margin: 80px 0 !important;
+  height: 800px;
+}
+
+.article-single-item {
+  display: none;
+}
+
+.article-single-item .article__more {
+    position: absolute;
+    right: 32px;
+    bottom: -45px;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+.article-single-item:first-of-type {
+  display: block;
+  width: 52%;
+  position: relative;
+  padding-right: 15px;
+  padding-left: 0;
+  flex-direction: column;
+}
+
+.article-single-item:first-of-type {
+  .article__date.datasquare {
+    bottom: 150px;
+    left: 25px;
+  }
+}
+
+.article-single-item:first-of-type .article__description {
+  display: block;
+  font-family: "Inter";
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.article-single-item:first-of-type .article__image_wrapper {
+  width: 100% !important;
+  height: 449px !important;
+  position: relative !important;
+  overflow: hidden;
+  max-height: inherit !important;
+}
+
+.article-single-item:first-of-type img {
+  border-radius: 25px;
+}
+
+.article__image_wrapper img {
+  border-radius: 15px;
+}
+
+.article-single-item:first-of-type .article__date_name {
+  padding-left: 0 !important;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-left: 24px !important;
+}
+
+.link-box-articles-subtitle {
+  font-size: 16px;
+  line-height: 16px;
+
+  @media only screen and (max-width: 700px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+}
+
+.article-single-item:first-of-type
+  .article__date_name
+  .article__date.datasquare {
+  display: none;
+}
+
+.article-single-item:first-of-type .article__text.--date {
+  padding-left: 24px;
+}
+
+.article-single-item .article__text.--date {
+  padding-left: 230px;
+}
+.article-single-item .article__name {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+  text-transform: initial;
+  font-family: "Inter";
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.article-single-item .datasquare {
+  border-right: none;
+}
+
+.article__block {
+  position: relative;
+}
+
+.article-single-item {
+  width: 47.5%;
+  position: absolute;
+  right: 0px;
+  top: 0;
+
+  @media only screen and (max-width: 768px) {
+    padding-left: 10px;
+  }
+}
+
+.article-single-item .article__date_name {
+  padding-left: 230px;
+  padding-top: 65px;
+  margin-bottom: 0;
+  min-height: 120px;
+}
+
+.article-single-item .article__description {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Inter';
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.article__block .article-single-item .article__image_wrapper {
+  width: 208px;
+  height: 224px;
+  position: absolute;
+}
+
+.article-single-item:nth-of-type(2) {
+  display: block;
+}
+
+.article-single-item:nth-of-type(3) {
+  display: block;
+  top: 240px;
+}
+
+.article-single-item:nth-of-type(4) {
+  display: block;
+  top: 480px;
+}
+
+.news-header-top-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.news-header-top-title {
+  font-family: "Inter";
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.news-header-top-bottom-text-box {
+  h2 {
+    font-family: "Inter";
+    font-size: 32px;
+    line-height: 32px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.check-all-news-title {
+  @media only screen and (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.check-all-news-title a {
+  text-transform: inherit;
+  text-decoration: underline;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  font-family: "Inter";
+  font-size: 16px;
+}
+
+.article-single-item .article__text {
+  justify-content: space-between;
+}
+
+.article-single-item .article__more_link {
+  font-size: 18px;
+  font-family: "Inter";
+}
+
+.article-single-item .article__text .article__date {
+  display: flex;
+  position: relative;
+}
+
+.article-single-item .article__text .article__date span {
+  margin-left: 2px;
+  font-family: "Inter";
+  font-size: 17px;
+  line-height: 21px;
+}
+
+.article-single-item .article__date.datasquare {
+  color: #7A428F;
+  margin-top: 5px;
+  font-family: "Inter";
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  position: absolute;
+  top: 20px;
+  left: 230px;
+}
+
+.article__date.datasquare {
+  display: none;
+}
+
+.article-single-item .datasquare > * {
+  line-height: 21px;
+}
+
+.link-box-articles-title {
+  color: #000;
+  font-size: 40px;
+  font-weight: 800;
+
+  @media only screen and (max-width: 700px) {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  #main_news {
+    margin: 20px 0 !important;
+  }
+  .article-single-item {
+    padding-right: 10px;
+  }
+  .article-single-item .article__name {
+    font-size: 15px;
+  }
+  .article-single-item:first-of-type .article__description {
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .article-single-item:first-of-type {
+    width: 100%;
+    border-right: none;
+    padding: 0 10px;
+  }
+
+  .article-single-item:first-of-type .article__image_wrapper {
+    width: inherit !important;
+  }
+
+  .article-single-item {
+    position: relative;
+    right: inherit !important;
+    top: inherit !important;
+    width: 100%;
+  }
+  
+  
+
+  .article-single-item:nth-of-type(2) {
+    top: inherit !important;
+  }
+
+  .article-single-item:nth-of-type(3) {
+    top: inherit !important;
+  }
+
+  .article__block .article-single-item .article__image_wrapper {
+    width: 100%;
+    height: auto;
+    position: relative;
+    max-height: initial;
+  }
+
+  .article-single-item .article__date_name {
+    padding-left: 0;
+  }
+
+  .article-single-item .article__description {
+    display: block;
+  }
+
+  .article-single-item .article__text.--date {
+    padding-left: 0;
+  }
+
+  .article-single-item .article__date_name .article__date.datasquare {
+    display: none;
+  }
+
+  .article-single-item:first-of-type .article__description {
+    margin-bottom: 0;
+  }
+}
+
+.seo-content-commercial-container {
+  margin-top: 200px;
+  
+  @media only screen and (max-width: 950px) {
+        margin-top: 50px;
+  }
+
+  .seo-content-commercial-box {
+    display: flex;
+    justify-content: space-between;
+    
+    @media only screen and (max-width: 950px) {
+        flex-wrap: wrap;
+      }
+
+    .seo-content-commercial-image-box {
+      width: 40%;
+      
+      @media only screen and (max-width: 1100px) {
+        width: 30%;
+      }
+      
+      @media only screen and (max-width: 950px) {
+        width: 100%;
+        order: 1;
+      }
+
+      .seo-content-commercial-image-background {
+        width: 1000px;
+        height: 800px;
+        position: relative;
+        left: -590px;
+        top: -105px;
+        background-image: url("https://dmtrade.store/data/include/cms/grafika/SpacetronikStoreGrafika/commercialDeskImage.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-size: 100%;
+        background-position: 50%;
+        
+        
+        @media only screen and (max-width: 1100px) {
+          left: -670px;
+        }
+        
+        @media only screen and (max-width: 950px) {
+            width: 460px;
+            height: 400px;
+            margin: auto auto;
+            left: 0;
+            top: 0;
+        }
+      }
+    }
+
+    .seo-content-commercial-text-box {
+      width: 60%;
+      
+      @media only screen and (max-width: 950px) {
+        width: 100%;
+      }
+
+      h3 {
+        text-align: left;
+        font-size: 110px;
+        line-height: 90px;
+        color: #000;
+        font-family: "moderatblack";
+        width: 600px;
+        letter-spacing: -2px;
+        position: relative;
+        margin-bottom: 65px;
+        
+        @media only screen and (max-width: 950px) {
+          font-size: 50px;
+          line-height: 50px;
+        }
+
+        &:after {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          bottom: -37px;
+          left: 0;
+          height: 5px;
+          width: 145px;
+          background-color: #000;
+        }
+      }
+
+      p {
+        font-size: 25px;
+        line-height: 36px;
+        font-family: "moderatregular";
+        
+        @media only screen and (max-width: 950px) {
+            font-size: 18px;
+            line-height: 22px; 
+        }
+      }
+
+      .seo-content-list {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 35px;
+
+        .seo-content-list-item {
+          position: relative;
+          font-family: "moderatregular";
+          width: 50%;
+          font-size: 27px;
+          line-height: 27px;
+          padding-left: 0px;
+          margin: 0 0 15px 0;
+          padding-left: 50px;
+          
+          @media only screen and (max-width: 950px) {
+              font-size: 18px;
+              line-height: 22px; 
+              padding-left: 35px;
+          }
+
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0px;
+            display: block;
+            width: 31px;
+            height: 31px;
+            background-image: url("https://dmtrade.store/data/include/cms/grafika/SpacetronikStoreGrafika/commercialTick.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-size: 100%;
+            background-position: 50%;
+            
+            @media only screen and (max-width: 950px) {
+              width: 23px;
+              height: 23px;
+          }
+          }
+        }
+      }
+    }
+    
+    .seo-content-commercial-text-box:lang(de) {
+      h3 {
+        font-size: 70px;
+        line-height: 70px;
+        width: 100%;
+        
+        @media only screen and (max-width: 950px) {
+              font-size: 50px;
+              line-height: 50px;
+          }
+        
+      }
+    }
+  }
+}
+
+
+@media (max-width: 978px) { 
+    #main_news {
+      display: none;
+    }
+}

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<div id="container">
+		<iaixsl:attribute name="class"><iaixsl:value-of select="page/@type"/><![CDATA[_page ]]><iaixsl:if test="/shop/page/login/@shop_registration = 'true'"><![CDATA[registration_page ]]></iaixsl:if>container max-width-1540</iaixsl:attribute>
+
+		<iaixsl:if test="not(action/set_render/item) or (action/set_render/item/@name = 'head')">
+			<header>
+				<iaixsl:attribute name="class"><iaixsl:if test="count(commercial_banner/link) &gt; 0"><![CDATA[ commercial_banner]]></iaixsl:if></iaixsl:attribute>
+				<cdata-end/>
+					<iai:container type="layout_top"/>
+				<cdata-start/>
+			</header>
+		</iaixsl:if>
+		<div id="layout">
+			<iaixsl:attribute name="class">row clearfix</iaixsl:attribute>
+			<iaixsl:if test="not(action/set_render/item) or (action/set_render/item/@name = 'aside')">
+				<aside class="span3">
+					<iaixsl:choose>
+						<iaixsl:when test="page/@type = 'projector'">
+							<iaixsl:attribute name="class">col-3</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'search'">
+							<iaixsl:attribute name="class">col-3 col-xl-2</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'main'">
+							<iaixsl:attribute name="class">col-3</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'blog-item'">
+							<iaixsl:attribute name="class">col-3 col-xl-2</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'blog-list'">
+							<iaixsl:attribute name="class">col-3 col-xl-2</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:otherwise>
+							<iaixsl:attribute name="class">col-3</iaixsl:attribute>
+						</iaixsl:otherwise>
+					</iaixsl:choose>
+					<cdata-end/>
+					<iai:container type="layout_left"/>
+					<cdata-start/>
+				</aside>
+			</iaixsl:if>
+			<!-- /Lewa kolumna -->
+
+			<!-- Środkowa kolumna -->
+			<iaixsl:if test="not(action/set_render/item) or (action/set_render/item/@name = 'content')">
+				<div id="content" class="span9">
+					<iaixsl:choose>
+						<iaixsl:when test="page/@type = 'projector'">
+							<iaixsl:attribute name="class">col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'search'">
+							<iaixsl:attribute name="class">col-xl-10 col-md-9 col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'main'">
+							<iaixsl:attribute name="class">col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'navigation'">
+							<iaixsl:attribute name="class">col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'blog-list'">
+							<iaixsl:attribute name="class">col-xl-10 col-md-9 col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:when test="page/@type = 'blog-item'">
+							<iaixsl:attribute name="class">col-xl-10 col-md-9 col-12</iaixsl:attribute>
+						</iaixsl:when>
+						<iaixsl:otherwise>
+							<iaixsl:attribute name="class">col-12</iaixsl:attribute>
+						</iaixsl:otherwise>
+					</iaixsl:choose>
+
+					<cdata-end/>
+					<iai:container type="layout_projector"/>
+					<iai:container type="basketedit"/>
+					<iai:container type="categories"/>
+					<iai:container type="contact"/>
+					<iai:container type="login"/>
+					<iai:container type="main"/>
+					<iai:container type="order1"/>
+					<iai:container type="order2"/>
+					<iai:container type="prepaid"/>
+					<iai:container type="producers"/>
+					<iai:container type="projector"/>
+					<iai:container type="return"/>
+					<iai:container type="search"/>
+					<iai:container type="searching"/>
+					<iai:container type="text"/>
+					<iai:container type="news"/>
+					<iai:container type="signin"/>
+					<iai:container type="password-recover"/>
+					<iai:container type="client-files"/>
+					<iai:container type="client-orders"/>
+					<iai:container type="partners"/>
+					<iai:container type="product-opinions"/>
+					<iai:container type="client-new"/>
+					<iai:container type="order-wrappers"/>
+					<iai:container type="client-save"/>
+					<iai:container type="order-newpayment"/>
+					<iai:container type="order-payment"/>
+					<iai:container type="order-postauction"/>
+					<iai:container type="order-open"/>
+					<iai:container type="sitemap"/>
+					<iai:container type="product-compare"/>
+					<iai:container type="tell-friend"/>
+					<iai:container type="navigation"/>
+					<iai:container type="membership-card"/>
+					<iai:container type="signin-wholesale"/>
+					<iai:container type="stock"/>
+					<iai:container type="stocks"/>
+					<iai:container type="product-stocks"/>
+					<iai:container type="rma-list"/>
+					<iai:container type="rma-add"/>
+					<iai:container type="opinions-add"/>
+					<iai:container type="opinions-photos"/>
+					<iai:container type="opinions-shop"/>
+					<iai:container type="noproduct"/>
+					<iai:container type="products-requests"/>
+					<iai:container type="products-bought"/>
+					<iai:container type="client-rebates"/>
+					<iai:container type="client-cards"/>
+					<iai:container type="pickup-sites"/>
+					<iai:container type="affiliate-main"/>
+					<iai:container type="affiliate-stats"/>
+					<iai:container type="affiliate-orders"/>
+					<iai:container type="affiliate-clients"/>
+					<iai:container type="affiliate-client"/>
+					<iai:container type="affiliate-calculations"/>
+					<iai:container type="affiliate-generator"/>
+					<iai:container type="affiliate-resources"/>
+					<iai:container type="order-nonstandardized"/>
+					<iai:container type="newsletter"/>
+					<iai:container type="client-cards"/>
+					<iai:container type="returns-products"/>
+					<iai:container type="returns-confirmation"/>
+					<iai:container type="returns-couriers"/>
+					<iai:container type="returns-details"/>
+					<iai:container type="returns-list"/>
+					<iai:container type="returns-methods"/>
+					<iai:container type="returns-repayments"/>
+					<iai:container type="returns-sites"/>
+					<iai:container type="returns-open"/>
+					<iai:container type="rma-products"/>
+					<iai:container type="rma-confirmation"/>
+					<iai:container type="rma-details"/>
+					<iai:container type="rma-list"/>
+					<iai:container type="rma-methods"/>
+					<iai:container type="rma-repayments"/>
+					<iai:container type="rma-sites"/>
+					<iai:container type="rma-open"/>
+					<iai:container type="projector-collection"/>
+					<iai:container type="projector-bundle"/>
+					<iai:container type="blog-item"/>
+					<iai:container type="blog-list"/>
+					<iai:container type="place-order"/>
+					<iai:container type="css-components"/>
+					<iai:container type="layout_projector_bottom"/>
+					<iai:container type="shoppinglist"/>
+          <iai:container type="subscription"/>
+          <iai:container type="subscriptions"/>
+					<cdata-start/>
+				</div>
+			</iaixsl:if>
+		</div>
+	</div>
+
+	<!-- Stopka -->
+	<iaixsl:if test="not(action/set_render/item) or (action/set_render/item/@name = 'footer')">
+		<footer>
+			<iaixsl:attribute name="class"><![CDATA[max-width-1540]]></iaixsl:attribute>
+			<cdata-end/>
+			<iai:container type="layout_bottom"/>
+			<cdata-start/>
+		</footer>
+	</iaixsl:if>
+	<iaixsl:variable name="projector_script_bottom">true</iaixsl:variable>
+	<iaixsl:if test="/shop/page/@type = 'main' or /shop/page/@type = 'search' or /shop/page/@type = 'place-order' or /shop/page/@type = 'noproduct' or ($projector_script_bottom and /shop/page/@type = 'projector')">
+		<iaixsl:choose>
+			<iaixsl:when test="/shop/@preview &gt; 0">
+				<script><iaixsl:attribute name="src"><![CDATA[/gfx/]]><iaixsl:value-of select="language/@id"/><![CDATA[/]]><iaixsl:value-of select="/shop/@preview"/><![CDATA[/shop.js]]></iaixsl:attribute></script>
+			</iaixsl:when>
+			<iaixsl:otherwise>
+				<script><iaixsl:attribute name="src"><![CDATA[/gfx/]]><iaixsl:value-of select="language/@id"/><iai_js_gz_file/></iaixsl:attribute></script>
+			</iaixsl:otherwise>
+		</iaixsl:choose>
+
+		<!-- Skrypty wydzielone do plików (After shop.js) -->
+		<iai:container_js type="after_shop_js"/>
+	</iaixsl:if>
+  
+  <!-- Podział Plików JS-->
+  <iai_js_gz_additional_file/>
+
+	<!-- Skrypty wydzielone do plików (Foot) -->
+	<iai:container_js type="footer"/>
+
+	<!-- Dodatki z panelu -->
+	<iaixsl:value-of disable-output-escaping="yes" select="php:functionString('additionalContent', 'additional_body_scripts')"/>
+  
+	<script><![CDATA[app_shop.runApp();]]></script>
+	<!-- Smarty -->
+	<iaixsl:if test="/shop/page/seolink_with_language_directory"/>
+<cdata-end/></iai:componentsdata></iai:component>

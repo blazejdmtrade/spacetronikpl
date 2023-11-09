@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+			<iaixsl:variable name="basket_title"></iaixsl:variable>
+
+			<div id="menu_basket" class="topBasket">
+			  <iaixsl:if test="/shop/page/@cache_html = 'true' ">
+					<iaixsl:attribute name="class"><![CDATA[topBasket --skeleton]]></iaixsl:attribute>
+				</iaixsl:if>
+				<a class="topBasket__sub">
+					<iaixsl:if test="$basket_title != ''"><iaixsl:attribute name="title"><iaixsl:value-of select="$basket_title"/></iaixsl:attribute></iaixsl:if>
+					<iaixsl:attribute name="href"><iaixsl:value-of select="basket/@link"/></iaixsl:attribute>
+
+					<span class="badge badge-info"><iaixsl:if test="basket/@count &gt; 0"><iaixsl:value-of disable-output-escaping="yes" select="basket/@count"/></iaixsl:if></span>
+					<span class="basket_name">
+						<iai:variable vid="Koszyk"/>
+					</span>
+				</a>
+
+				<div class="topBasket__details --products" style="display: none;">
+					<div class="topBasket__block --labels">
+						<label class="topBasket__item --name"><iai:variable vid="Produkt"/></label>
+						<label class="topBasket__item --sum"><iai:variable vid="Ilość"/></label>
+						<label class="topBasket__item --prices"><iai:variable vid="Cena"/></label>
+					</div>
+					<div class="topBasket__block --products"/>
+					<iaixsl:if test="/shop/oneclick/payment">
+						<div class="topBasket__block --oneclick topBasket_oneclick">
+							<iaixsl:attribute name="data-lang"><iaixsl:value-of select="/shop/language/option[@selected ='true']/@id"/></iaixsl:attribute>
+							<div class="topBasket_oneclick__label">
+								<span class="topBasket_oneclick__text --fast"><iai:variable vid="Szybkie zakupy"/> <strong>1-Click</strong></span>
+								<span class="topBasket_oneclick__text --registration"> (<iai:variable vid="bez rejestracji"/>)</span>
+							</div>
+							<div class="topBasket_oneclick__items">
+								<iaixsl:for-each select="/shop/oneclick/payment">
+									<span>
+										<iaixsl:attribute name="class"><![CDATA[topBasket_oneclick__item --]]><iaixsl:value-of select="@id"/></iaixsl:attribute>
+										<iaixsl:attribute name="title"><iaixsl:value-of select="@name"/></iaixsl:attribute>
+										<img class="topBasket_oneclick__icon">
+											<iaixsl:attribute name="src"><iaixsl:value-of select="@icon"/></iaixsl:attribute>
+											<iaixsl:attribute name="alt"><iaixsl:value-of select="@name"/></iaixsl:attribute>
+										</img>
+									</span>
+								</iaixsl:for-each>
+							</div>
+						</div>
+					</iaixsl:if>
+				</div>
+				<div class="topBasket__details --shipping" style="display: none;">
+					<span class="topBasket__name"><iai:variable vid="Koszt dostawy od"/></span>
+					<span id="shipppingCost"/>
+				</div>
+
+				<iaixsl:if test="/shop/action/sites/@session_share_disabled">
+					<script>
+						<![CDATA[app_shop.vars.session_share = "]]><iaixsl:value-of select="/shop/action/sites/@session_share"/><![CDATA[";]]>
+						<iaixsl:if test="/shop/action/sites/site">
+						<![CDATA[app_shop.vars.sites = []]><iaixsl:for-each select="/shop/action/sites/site"><iaixsl:if test="not(position()=1)"><![CDATA[,]]></iaixsl:if><![CDATA["]]><iaixsl:value-of select="@url"/><![CDATA["]]></iaixsl:for-each><![CDATA[];]]>
+						</iaixsl:if>
+					</script>
+				</iaixsl:if>
+
+				<iaixsl:if test="/shop/page/@cache_html = 'true' ">
+					<script>
+						<![CDATA[app_shop.vars.cache_html = true;]]>
+					</script>
+				</iaixsl:if>
+
+				<iaixsl:if test="/shop/basket/product">
+					<iaixsl:if test="/shop/page/@cache_basketwishes"> </iaixsl:if>
+					<iaixsl:if test="/shop/page/@cache_basket"> </iaixsl:if>
+				</iaixsl:if>
+			</div>
+			<iaixsl:if test="wishes/@count"> </iaixsl:if>
+		<cdata-end/></iai:componentsdata></iai:component>

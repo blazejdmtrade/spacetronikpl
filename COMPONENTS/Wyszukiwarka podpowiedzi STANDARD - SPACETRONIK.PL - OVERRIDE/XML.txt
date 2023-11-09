@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<form action="/search.php" method="get" id="menu_search" class="menu_search">
+		<iaixsl:if test="/shop/action/search/@url"><iaixsl:attribute name="action"><iaixsl:value-of select="/shop/action/search/@url"/></iaixsl:attribute></iaixsl:if>
+		<a href="#showSearchForm" class="menu_search__mobile"></a>
+
+		<div class="menu_search__block">
+			<div class="menu_search__item --input">
+				<input class="menu_search__input" type="text" name="text" autocomplete="off">
+					<iaixsl:attribute name="placeholder"><iai:variable vid="Wpisz czego szukasz"/></iaixsl:attribute>
+					<iaixsl:if test="/shop/page/search_params/text">
+						<iaixsl:attribute name="placeholder"><iaixsl:value-of select="/shop/page/search_params/text/@value"/></iaixsl:attribute>
+						<iaixsl:attribute name="value"><iaixsl:value-of select="/shop/page/search_params/text/@value"/></iaixsl:attribute>
+					</iaixsl:if>
+				</input>
+				<button class="menu_search__submit" type="submit">
+					
+				</button>
+			</div>
+			<div class="menu_search__item --results search_result"/>
+		</div>
+	</form>
+<cdata-end/></iai:componentsdata></iai:component>

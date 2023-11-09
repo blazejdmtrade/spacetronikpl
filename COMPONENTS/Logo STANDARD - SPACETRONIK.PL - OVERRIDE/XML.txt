@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<div id="logo" class="d-flex align-items-center">
+		<iaixsl:if test="mask/top2/link/image/@src and (mask/top2/link/image/@width&gt;1 or mask/top2/link/image/@height &gt; 1)"><iaixsl:attribute name="data-bg"><iaixsl:value-of select="mask/top2/link/image/@src"/></iaixsl:attribute></iaixsl:if>
+		<a>
+			<iaixsl:attribute name="href"><iaixsl:value-of select="/shop/mask/top/link/@href"/></iaixsl:attribute>
+			<iaixsl:attribute name="target"><iaixsl:value-of select="/shop/mask/top/link/@target"/></iaixsl:attribute>
+			<iaixsl:choose>
+				<iaixsl:when test="/shop/mask/top/link/image_mobile/@src and /shop/mask/top/link/image_tablet/@src">
+					<picture>
+						<iaixsl:if test="/shop/mask/top/link/image/@src">
+							<source>
+								<iaixsl:attribute name="media"><![CDATA[(min-width:979px)]]></iaixsl:attribute>
+								<iaixsl:attribute name="srcset"><iaixsl:value-of select="/shop/mask/top/link/image/@src"/></iaixsl:attribute>
+								<iaixsl:attribute name="widthset"><iaixsl:value-of select="/shop/mask/top/link/image/@width"/></iaixsl:attribute>
+								<iaixsl:attribute name="heightset"><iaixsl:value-of select="/shop/mask/top/link/image/@height"/></iaixsl:attribute>
+							</source>
+						</iaixsl:if>
+						<iaixsl:if test="/shop/mask/top/link/image_tablet/@src">
+							<source>
+								<iaixsl:attribute name="media"><![CDATA[(min-width:757px)]]></iaixsl:attribute>
+								<iaixsl:attribute name="srcset"><iaixsl:value-of select="/shop/mask/top/link/image_tablet/@src"/></iaixsl:attribute>
+								<iaixsl:attribute name="widthset"><iaixsl:value-of select="/shop/mask/top/link/image_tablet/@width"/></iaixsl:attribute>
+								<iaixsl:attribute name="heightset"><iaixsl:value-of select="/shop/mask/top/link/image_tablet/@height"/></iaixsl:attribute>
+							</source>
+						</iaixsl:if>
+						<img>
+							<iaixsl:attribute name="src"><iaixsl:value-of select="/shop/mask/top/link/image_mobile/@src"/></iaixsl:attribute>
+							<iaixsl:attribute name="alt"><iaixsl:value-of select="/shop/mask/top/link/description"/></iaixsl:attribute>
+							<iaixsl:attribute name="width"><iaixsl:value-of select="/shop/mask/top/link/image_mobile/@width"/></iaixsl:attribute>
+							<iaixsl:attribute name="height"><iaixsl:value-of select="/shop/mask/top/link/image_mobile/@height"/></iaixsl:attribute>
+						</img>
+					</picture>
+				</iaixsl:when>
+				<iaixsl:otherwise>
+					<img>
+						<iaixsl:attribute name="src"><iaixsl:value-of select="/shop/mask/top/link/image/@src"/></iaixsl:attribute>
+						<iaixsl:attribute name="alt"><iaixsl:value-of select="/shop/mask/top/link/description"/></iaixsl:attribute>
+						<iaixsl:attribute name="width"><iaixsl:value-of select="/shop/mask/top/link/image/@width"/></iaixsl:attribute>
+						<iaixsl:attribute name="height"><iaixsl:value-of select="/shop/mask/top/link/image/@height"/></iaixsl:attribute>
+					</img>
+				</iaixsl:otherwise>
+			</iaixsl:choose>
+		</a>
+	</div>
+	<!--smarty-->
+	<iaixsl:if test="/shop/mask/@rwd_pc">
+		<iaixsl:if test="/shop/mask/@rwd_tablet"></iaixsl:if>
+		<iaixsl:if test="/shop/mask/@rwd_smartphone"></iaixsl:if>
+	</iaixsl:if>
+<cdata-end/></iai:componentsdata></iai:component>

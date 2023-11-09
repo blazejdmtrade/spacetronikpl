@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<iaixsl:variable name="disableBar"></iaixsl:variable>
+	<iaixsl:variable name="disableReturns"></iaixsl:variable>
+	<iaixsl:if test="not($disableBar) and /shop/basket/@toshippingfree != ''">
+	  
+	  
+	  <div class="black-free-shipping-bar">
+	    
+	    <div id="black-free-shipping-bar-slider">
+	      
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	    
+	    <div class="free-shipping-info-box">
+	      <iai:variable vid="DARMOWA DOSTAWA"/>
+	      <iai:variable vid="od"/>
+	      <iaixsl:value-of select="/shop/basket/@shippinglimitfree_formatted"/>
+	    </div>
+	      
+	      
+	    </div>
+
+		</div>
+		
+	</iaixsl:if>
+<cdata-end/></iai:componentsdata></iai:component>

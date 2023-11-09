@@ -1,0 +1,409 @@
+app_shop.run(function searchResultsAppShop() {
+  app_shop.fn.searchResults = new SearchResults({
+    // searchInput: '.menu_search__input',
+    // resultsWrapper: '.search_result',
+    resultsLimit: 6,
+     inputLengthToStartSearching: 2,
+    // afterBuildResult: (dataResults) => {
+    //   console.log('callback', dataResults);
+    // },
+    // buttonAllClass: ' btn --outline',
+  });
+}, 'all', '#menu_search');
+const searchTxt = {};
+searchTxt.categories = <iai:variable vid="Kategorie"/>;
+searchTxt.cms = <iai:variable vid="Informacje"/>;
+searchTxt.beforeProducer = <iai:variable vid="Producent"/> + ": ";
+searchTxt.beforeSeries = <iai:variable vid="Seria"/> + ": ";
+searchTxt.separator = " / ";
+searchTxt.buttonAllText = <iai:variable vid="Pokaż wszystkie"/>;
+searchTxt.telPrice = <iai:variable vid="Cena na telefon"/>;
+
+/**
+ * Wyszukiwarka podpowiedzi obsługująca powiązane zapytania - searchQueries
+ * @param {object} params - obiekt z wszystkimi callback'ami
+ * @param {string} searchInput - selektor dla inputa do którego wpisujemy szukaną frazę
+ * @param {string} resultsWrapper - selektor dla wrappera w którym będą pojawiały się wyniki
+ * @param {integer} resultsLimit - ile produktów ma się pojawić w podpowiedzi
+ * @param {integer} inputLengthToStartSearching - po wpisaniu ilu znaków ma być wysłane zapytanie
+ * @param {function} afterBuildResult - callback po wyszukaniu podpowiedzi
+ * @param {string} buttonAllClass - klasy dla buttona "Pokaż wszystkie"
+ */
+SearchResults = function SearchResults(params) {
+  const that = this;
+  this.params = params || {};
+
+  this.vars = {
+    typingTimer: '',
+    doneTypingInterval: 500,
+    searchResultQuery: '/graphql/v1/',
+  };
+
+  /* Pobranie podpowiedzi z zapisywaniem do sessionStorage */
+  this.fetchData = async () => {
+    const inputValue = this.searchInput.value;
+    if (inputValue.length < this.inputLengthToStartSearching) return false;
+    if (sessionStorage.getItem(`search_${inputValue}`)) return JSON.parse(sessionStorage.getItem(`search_${inputValue}`));
+
+    const searchResultQuery = JSON.stringify({
+        query: `query {
+        productsTextSearch(searchInput: {
+            text: "${inputValue}",
+            limit: ${this.resultsLimit}
+          }) {
+            products {
+              name, link, iconSmall, iconSmallSecond,
+              price {
+                  price {
+                      gross {
+                        value
+                        formatted
+                      }
+                      net {
+                        value
+                        formatted
+                      }
+                  }
+              }
+            }
+            series {
+                name, link
+            }
+            producers {
+                name, link
+            }
+            menuNodes {
+                name, link
+            }
+            cms {
+                name, link
+            }
+            searchQueries {
+                name, link
+            }
+          }
+        }`,
+      });
+
+    try {
+      const response = await fetch(this.vars.searchResultQuery, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: searchResultQuery,
+      });
+
+      const json = await response.json();
+      const dataJson = json.data.productsTextSearch;
+      sessionStorage.setItem(`search_${inputValue}`, JSON.stringify(dataJson));
+      return dataJson;
+    } catch (error) {
+      console.error('AJAX fetchDataSearchResults() Error:', error);
+      return false;
+    }
+  };
+
+  /* Dodanie odpowiednich klas do pokazania podpowiedzi */
+  this.openResults = () => {
+    this.searchInput.closest('form').classList.add('--open');
+    this.resultsWrapper.scrollTop = 0;
+    document.documentElement.classList.add('--results-open');
+    if (document.querySelector('#container.main_page')) document.documentElement.classList.add('--results-main-open');
+  };
+
+  /* Usunięcie odpowiednich klas, aby zamknąć podpowiedzi */
+  this.closeResults = () => {
+    this.searchInput.closest('form').classList.remove('--open');
+    document.documentElement.classList.remove('--results-open');
+    if (document.querySelector('#container.main_page')) document.documentElement.classList.remove('--results-main-open');
+  };
+
+  /* Stworzenie struktury html z podpowiedzimi */
+  this.buildResult = async () => {
+    this.searchInput.closest('form').classList.add('--loading');
+    const resultsData = await this.fetchData();
+    this.searchInput.closest('form').classList.remove('--loading');
+    this.resultsWrapper.innerHTML = '';
+    if (resultsData) {
+      // Sprawdzenie, czy są jakiekolwiek wyniki
+      const resultsDataEmpty = !Object.values(resultsData).filter((checkEmptyArray) => checkEmptyArray ? checkEmptyArray.length : '').length;
+      if (resultsDataEmpty) {
+        this.closeResults();
+        return false;
+      }
+      this.openResults();
+
+      // Nowe SearchQueries
+      if (resultsData.searchQueries && resultsData.searchQueries.length) {
+        const inputValue = this.searchInput.value;
+        const regexInputValue = new RegExp(inputValue, 'i');
+        this.resultsWrapper.innerHTML += `
+          <div class="search_result__block --queries">
+            ${resultsData.searchQueries.map((el) => `<a class="search_result__item --query" href="${el.link}">${el.name.replace(regexInputValue, '<b>$&</b>')}</a>`).join('')}
+          </div>
+        `;
+      }
+
+      // Produkty, producenci, serie, kategorie, cms
+      const notSearchQueriesArray = Object.keys(resultsData).filter((notQueries) => notQueries !== 'searchQueries');
+      const thereAreOther = notSearchQueriesArray.some((el) => (resultsData[el] ? resultsData[el].length : ''));
+      if (thereAreOther) {
+        this.resultsWrapper.innerHTML += '<div class="search_result__block --others"></div>';
+
+        // Produkty
+        if (resultsData.products && resultsData.products.length) {
+          this.resultsWrapper.querySelector('.search_result__block.--others').innerHTML += `
+            <div class="search_result__sub --products">
+              ${resultsData.products.map((el) => `
+                <a class="search_result__item --product" href="${el.link}">
+                  <span class="search_result__icon">${el.iconSmallSecond !== undefined ?   
+                    `<picture>
+                      <source type="image/webp" srcset="${el.iconSmall}"/>
+                      <img src="${el.iconSmallSecond}" alt="${el.name}">
+                    </picture>`
+                  : 
+                    `<img src="${el.iconSmall}" alt="${el.name}" />`
+                  }</span>
+                  <span class="search_result__name_wrapper">
+                    <span class="search_result__name">${el.name}</span>
+                    <span class="search_result__price">${that.netPrice ? el.price.price.net.value !== 0 ? el.price.price.net.formatted : searchTxt.telPrice : el.price.price.gross.value !== 0 ? el.price.price.gross.formatted : searchTxt.telPrice}</span>
+                  </span>
+                </a>
+              `).join('')}
+              <button type="submit" class="search_result__item --button-all${that.buttonAllClass}">${searchTxt.buttonAllText}</button>
+            </div>
+          `;
+        }
+
+        // Kategorie, producenci, serie
+        if ((resultsData.producers && resultsData.producers.length) || (resultsData.series && resultsData.series.length) || (resultsData.menuNodes && resultsData.menuNodes.length)) {
+          this.resultsWrapper.querySelector('.search_result__block.--others').innerHTML += `
+            <div class="search_result__sub --categories">
+              <strong class="search_result__label">${searchTxt.categories}</strong>
+              <div class="search_result__items">
+                ${(resultsData.producers) ? resultsData.producers.map((el) => `
+                  <a class="search_result__item --producer" href="${el.link}">
+                    <span class="search_result__name_label">${searchTxt.beforeProducer}</span><span class="search_result__name">${el.name}</span>
+                  </a>
+                `).join('') : ''}
+
+                ${(resultsData.series) ? resultsData.series.map((el) => `
+                  <a class="search_result__item --series" href="${el.link}">
+                    <span class="search_result__name_label">${searchTxt.beforeSeries}</span><span class="search_result__name">${el.name}</span>
+                  </a>
+                `).join('') : ''}
+
+                ${(resultsData.menuNodes) ? resultsData.menuNodes.map((el) => `
+                  <a class="search_result__item --menu" href="${el.link}">
+                    <span class="search_result__name">${el.bc ? el.bc.item.map((menuEl) => menuEl.title).join(searchTxt.separator) : el.name}</span>
+                  </a>
+                `).join('') : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // CMS
+        if (resultsData.cms && resultsData.cms.length) {
+          this.resultsWrapper.querySelector('.search_result__block.--others').innerHTML += `
+            <div class="search_result__sub --cms">
+              <strong class="search_result__label">${searchTxt.cms}</strong>
+              <div class="search_result__items">
+                ${resultsData.cms.map((el) => `
+                  <a class="search_result__item --cms" href="${el.link}">
+                    <span class="search_result__name">${el.name}</span>
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+      }
+    } else {
+      this.closeResults();
+    }
+
+    // Callback
+    if (this.afterBuildResult) this.afterBuildResult(resultsData);
+    return true;
+  };
+
+  // Zmiana value w inpucie podczas poruszania się strzałkami
+  this.updateSearchInput = () => {
+    const currentName = (that.resultsWrapper.querySelector('.search_result__item.--active .search_result__name')) ? that.resultsWrapper.querySelector('.search_result__item.--active .search_result__name').textContent : that.resultsWrapper.querySelector('.search_result__item.--active').textContent;
+    that.searchInput.value = currentName;
+  };
+
+  // Zmiana aktywnego elementu podczas poruszania się strzałkami
+  this.updateFocusElement = (element) => {
+    this.resultsWrapper.querySelectorAll('.search_result__item').forEach((el) => el.classList.remove('--active'));
+    typeof element !== 'null' ? element.classList.add('--active') : '';
+    typeof element !== 'null' ? element.focus() : '';
+    this.updateSearchInput();
+  };
+
+  this.initEvents = () => {
+    const formElement = document.getElementById('menu_search');
+    if (formElement) {
+      formElement.addEventListener('submit', function formSubmit() {
+        const dataValue = that.searchInput.getAttribute('data-value');
+        if (dataValue) that.searchInput.value = dataValue;
+      });
+    }
+
+    // Ustawianie timeout dla opóźnienia wyszukiwania podczas wpisywania frazy
+    this.searchInput.addEventListener('keyup', function searchInputChange(e) {
+      const key = e.which || e.keyCode || 0;
+      if (key !== 37 && key !== 38 && key !== 39 && key !== 40) {
+        that.searchInput.setAttribute('data-value', this.value);
+        clearTimeout(that.vars.typingTimer);
+        that.vars.typingTimer = setTimeout(that.buildResult, that.vars.doneTypingInterval);
+        if (document.querySelector('html._mobile:not(.sidebar_open):not(.--search-open) .main_page')) {
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+
+    // Ustawienie timeout oraz dodanie klasy --focus
+    this.searchInput.addEventListener('keydown', function searchInputChange(e) {
+      const key = e.which || e.keyCode || 0;
+      if (key !== 37 && key !== 38 && key !== 39 && key !== 40) {
+        that.searchInput.setAttribute('data-value', this.value);
+        clearTimeout(that.vars.typingTimer);
+        that.searchInput.closest('form').classList.add('--focus');
+        // Submit po wciśnięciu Enter
+        if (document.querySelector('.--search-open') && key === 13) {
+          e.preventDefault();
+          this.closest('form').submit();
+          return false;
+        }
+      }
+      return true;
+    });
+
+    // Dodanie klasy --focus, gdy klikniemy w input
+    this.searchInput.addEventListener('focus', function searchInputFocus() {
+      this.closest('form').classList.add('--focus');
+    });
+
+    // Dodanie klasy podczas scroll'owania, aby pokazać/ukryć wyszukiwarkę na stronie głównej
+    document.addEventListener('scroll', function documentScrollFunction(e) {
+      if (window.scrollY > 0) {
+        document.documentElement.classList.add('--scroll-down');
+      } else if(!$('html').hasClass('sidebar_open') && !$('html').hasClass('filters_open')) {
+        document.documentElement.classList.remove('--scroll-down');
+      }
+    });
+
+    // Schowanie klawiatury podczas scrollo'owania wyników wyszukiwania
+    document.querySelector('.search_result, .search_result__block').addEventListener('scroll', function documentScrollFunction() {
+      if (app_shop.vars.view < 3) document.activeElement.blur();
+    });
+
+    // Poruszanie się po wyszukiwarce za pomocą strzałek na klawiaturze
+    document.addEventListener('keydown', function eventDelegationKeyDown(e) {
+      if (that.searchInput.closest('form.--open.--focus')) {
+        const key = e.which || e.keyCode || 0;
+        if (key === 37 || key === 38 || key === 39 || key === 40) {
+          e.preventDefault();
+          const allResultItems = [...that.resultsWrapper.querySelectorAll('.search_result__item'), that.resultsWrapper.querySelector('.search_result__button_all')];
+          const firstQueryItem = that.resultsWrapper.querySelector('.search_result__item.--query');
+          const firstOtherItem = that.resultsWrapper.querySelector('.search_result__block.--others .search_result__item');
+          switch (key) {
+            case 40: { // Strzałka w dół
+              const currentElementIndex = allResultItems.indexOf(that.resultsWrapper.querySelector('.search_result__item.--active'));
+              if (currentElementIndex > -1 && allResultItems[currentElementIndex + 1]) {
+                that.updateFocusElement(allResultItems[currentElementIndex + 1]);
+              } else {
+                that.updateFocusElement(allResultItems[0]);
+              }
+              break;
+            }
+            case 38: { // Strzałka do góry
+              const currentElementIndex = allResultItems.indexOf(that.resultsWrapper.querySelector('.search_result__item.--active'));
+              if (currentElementIndex > -1 && allResultItems[currentElementIndex - 1]) {
+                that.updateFocusElement(allResultItems[currentElementIndex - 1]);
+              } else {
+                that.updateFocusElement(allResultItems[allResultItems.length - 1]);
+              }
+              that.updateSearchInput();
+              break;
+            }
+            case 37: { // Strzałka w lewo
+              if (app_shop.vars.view !== 1 && firstQueryItem && firstOtherItem) {
+                that.updateFocusElement(firstQueryItem);
+              }
+              break;
+            }
+            case 39: { // Strzałka w prawo
+              if (app_shop.vars.view !== 1 && firstQueryItem && firstOtherItem) {
+                that.updateFocusElement(firstOtherItem);
+              }
+              break;
+            }
+            default: {
+              return true;
+            }
+          }
+        } else if (key !== 13) {
+          // W przypadku kliknięcia innego przycisku focus wraca do inputa (oprócz wciśnięcia Enter)
+          that.searchInput.focus();
+        }
+        return false;
+      }
+    });
+
+    document.addEventListener('click', function eventDelegation(e) {
+      // Otwarcie wyszukiwarki mobile/tablet
+      if (e.target.closest('.menu_search__mobile')) {
+        e.preventDefault();
+        document.documentElement.classList.add('--search-open');
+        $('.main_slider').slick('slickSetOption', 'autoplay', false, true);//wyłączenie slidera kiedy otwarta jest wyszukiwarka
+        that.searchInput.focus();
+      }
+
+      // Zamknięcie wyszukiwarki mobile/tablet
+      if (e.target.closest('.--search-open .menu_search__submit')) {
+        e.preventDefault();
+        document.documentElement.classList.remove('--search-open', '--results-main-open');
+        $('.main_slider').slick('slickSetOption', 'autoplay', true, true);//włączenie slidera po zamknięciu wyszukiwarki
+      }
+
+      // Usunięcie klasy podczas otwierania menu na stronie głównej
+      if (e.target.closest('header .navbar-toggler')) {
+        document.documentElement.classList.remove('--results-main-open');
+      }
+
+      // Zamknięcie podpowiedzi po kliknięciu gdziekolwiek indziej niż w wyszukiwarkę
+      if (that.searchInput.closest('form').classList.contains('--focus') && !that.searchInput.closest('form').contains(e.target)) {
+        that.searchInput.closest('form').classList.remove('--focus');
+      }
+      return false;
+    });
+  };
+
+  this.init = () => {
+    const {
+      searchInput,
+      resultsWrapper,
+      resultsLimit,
+      inputLengthToStartSearching,
+      afterBuildResult,
+      buttonAllClass,
+    } = this.params;
+
+    this.searchInput = searchInput ? document.querySelector(searchInput) : document.querySelector('.menu_search__input');
+    this.resultsWrapper = resultsWrapper ? document.querySelector(resultsWrapper) : document.querySelector('.search_result');
+    this.resultsLimit = resultsLimit || '';
+    this.inputLengthToStartSearching = inputLengthToStartSearching || 4;
+    this.netPrice = (app_shop.vars.priceType === 'net') ? true : false;
+    this.afterBuildResult = afterBuildResult || false;
+    this.buttonAllClass = buttonAllClass || ' btn --outline';
+
+    this.initEvents();
+  };
+
+  return this.init();
+};

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><iai:component><iai:componentsdata><cdata-start/>
+	<iaixsl:if test="count(commercial_banner/link) &gt; 0">
+		<div id="main_banner1" class="skeleton mb-4">
+			<div class="main_slider">
+				<iaixsl:for-each select="commercial_banner/link">
+					<iaixsl:if test="not(html)">
+						<div class="main_slider__item">
+							<iaixsl:choose>
+								<iaixsl:when test="image">
+									<iaixsl:attribute name="style" ><![CDATA[--width:]]><iaixsl:value-of select="image/@width" /><![CDATA[;--height:]]><iaixsl:value-of select="image/@height" /><![CDATA[;]]></iaixsl:attribute>
+								</iaixsl:when>
+								<iaixsl:when test="image_desktop or image_tablet or image_mobile">
+									<iaixsl:attribute name="style" ><![CDATA[--width:]]><iaixsl:value-of select="image_mobile/@width" /><![CDATA[;--height:]]><iaixsl:value-of select="image_mobile/@height" /><![CDATA[;--width-sm:]]><iaixsl:value-of select="image_tablet/@width" /><![CDATA[;--height-sm:]]><iaixsl:value-of select="image_tablet/@height" /><![CDATA[;--width-md:]]><iaixsl:value-of select="image_desktop/@width" /><![CDATA[;--height-md:]]><iaixsl:value-of select="image_desktop/@height" /><![CDATA[;]]></iaixsl:attribute>
+								</iaixsl:when>
+							</iaixsl:choose>
+							<a>
+								<iaixsl:choose>
+									<iaixsl:when test="@target = '_blank'">
+										<iaixsl:attribute name="target"><![CDATA[_blank]]></iaixsl:attribute>
+									</iaixsl:when>
+									<iaixsl:otherwise>
+										<iaixsl:attribute name="target"><![CDATA[_self]]></iaixsl:attribute>
+									</iaixsl:otherwise>
+								</iaixsl:choose>
+								<iaixsl:if test="@href"><iaixsl:attribute name="href"><iaixsl:value-of select="@href"/></iaixsl:attribute></iaixsl:if>
+								<iaixsl:attribute name="title"><iaixsl:value-of select="text"/></iaixsl:attribute>
+								<iaixsl:choose>
+									<iaixsl:when test="image">
+										<iaixsl:if test="image/@src">
+											<img src="/gfx/pol/loader.gif?r=1638956988">
+												<iaixsl:attribute name="width" ><iaixsl:value-of select="image/@width" /></iaixsl:attribute>
+												<iaixsl:attribute name="height" ><iaixsl:value-of select="image/@height" /></iaixsl:attribute>
+												<iaixsl:attribute name="alt"><iaixsl:value-of select="text"/></iaixsl:attribute>
+												<iaixsl:choose>
+													<iaixsl:when test="position() = 1">
+														<iaixsl:attribute name="class"><![CDATA[loaded]]></iaixsl:attribute>
+														<iaixsl:attribute name="src"><iaixsl:value-of select="image/@src"/></iaixsl:attribute>
+													</iaixsl:when>
+													<iaixsl:otherwise>
+														<iaixsl:attribute name="class"><![CDATA[b-lazy loaded]]></iaixsl:attribute>
+														<iaixsl:attribute name="data-src"><iaixsl:value-of select="image/@src"/></iaixsl:attribute>
+													</iaixsl:otherwise>
+												</iaixsl:choose>
+											</img>
+										</iaixsl:if>
+									</iaixsl:when>
+									<iaixsl:when test="image_desktop or image_tablet or image_mobile">
+										<picture>
+											<iaixsl:if test="image_desktop/@src">
+												<source>
+													<iaixsl:attribute name="width" ><iaixsl:value-of select="image_desktop/@width" /></iaixsl:attribute>
+													<iaixsl:attribute name="height" ><iaixsl:value-of select="image_desktop/@height" /></iaixsl:attribute>
+													<iaixsl:attribute name="media"><![CDATA[(min-width:979px)]]></iaixsl:attribute>
+													<iaixsl:choose>
+														<iaixsl:when test="position() = 1">
+															<iaixsl:attribute name="srcset"><iaixsl:value-of select="image_desktop/@src"/></iaixsl:attribute>
+														</iaixsl:when>
+														<iaixsl:otherwise>
+															<iaixsl:attribute name="data-srcset"><iaixsl:value-of select="image_desktop/@src"/></iaixsl:attribute>
+														</iaixsl:otherwise>
+													</iaixsl:choose>
+												</source>
+											</iaixsl:if>
+											<iaixsl:if test="image_tablet/@src">
+												<source>
+													<iaixsl:attribute name="width" ><iaixsl:value-of select="image_tablet/@width" /></iaixsl:attribute>
+													<iaixsl:attribute name="height" ><iaixsl:value-of select="image_tablet/@height" /></iaixsl:attribute>
+													<iaixsl:attribute name="media"><![CDATA[(min-width:757px)]]></iaixsl:attribute>
+													<iaixsl:choose>
+														<iaixsl:when test="position() = 1">
+															<iaixsl:attribute name="srcset"><iaixsl:value-of select="image_tablet/@src"/></iaixsl:attribute>
+														</iaixsl:when>
+														<iaixsl:otherwise>
+															<iaixsl:attribute name="data-srcset"><iaixsl:value-of select="image_tablet/@src"/></iaixsl:attribute>
+														</iaixsl:otherwise>
+													</iaixsl:choose>
+												</source>
+											</iaixsl:if>
+											<iaixsl:if test="image_mobile/@src">
+												<img src="/gfx/pol/loader.gif?r=1638956988">
+													<iaixsl:attribute name="width" ><iaixsl:value-of select="image_mobile/@width" /></iaixsl:attribute>
+													<iaixsl:attribute name="height" ><iaixsl:value-of select="image_mobile/@height" /></iaixsl:attribute>
+													<iaixsl:attribute name="alt"><iaixsl:value-of select="text"/></iaixsl:attribute>
+													<iaixsl:choose>
+														<iaixsl:when test="position() = 1">
+															<iaixsl:attribute name="class"><![CDATA[loaded]]></iaixsl:attribute>
+															<iaixsl:attribute name="src"><iaixsl:value-of select="image_mobile/@src"/></iaixsl:attribute>
+														</iaixsl:when>
+														<iaixsl:otherwise>
+															<iaixsl:attribute name="class"><![CDATA[b-lazy loaded]]></iaixsl:attribute>
+															<iaixsl:attribute name="data-src"><iaixsl:value-of select="image_mobile/@src"/></iaixsl:attribute>
+														</iaixsl:otherwise>
+													</iaixsl:choose>
+												</img>
+											</iaixsl:if>
+										</picture>
+									</iaixsl:when>
+									<iaixsl:otherwise>
+										<iaixsl:value-of disable-output-escaping="yes" select="text"/>
+									</iaixsl:otherwise>
+								</iaixsl:choose>
+							</a>
+						</div>
+					</iaixsl:if>
+					<iaixsl:if test="html">
+						<div><iaixsl:value-of disable-output-escaping="yes" select="html"/></div>
+					</iaixsl:if>
+				</iaixsl:for-each>
+			</div>
+		</div>
+	</iaixsl:if>
+<cdata-end/></iai:componentsdata></iai:component>

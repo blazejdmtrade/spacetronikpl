@@ -1,0 +1,102 @@
+app_shop.fn.customBasket = (product) => `
+  <div class="topBasket__row">
+    <a class="topBasket__item --photo" href="${product.link}">
+      ${(product.icon_second !== undefined) ? `<picture>
+          <source type="image/webp" srcset="${product.icon}"/>
+          <img src="${product.icon_second}" alt="${product.name}">
+        </picture>` : `<img src="${product.icon}" alt="${product.name}">`}
+    </a>
+    <a class="topBasket__item --name" href="${product.link}">
+      <span class="topBasket__name">${product.name}</span>
+      ${product.size !== 'uniw' ? `<span class="topBasket__size">${product.size_name}</span>` : ''}
+      ${product.product_version_name ? `<span class="topBasket__version">${product.product_version_name}</span>` : ''}
+    </a>
+    <span class="topBasket__item --sum">
+      <span class="value">${product.count}</span>
+      <span class="unit">${product.worth_unit}</span>
+    </span>
+    <span class="topBasket__item --prices">${(app_shop.vars.priceType === 'net')
+    ? product.prices.worth_net_formatted
+    : product.prices.worth_gros_formatted}</span>
+  </div>
+`;
+
+app_shop.fn.menu_basket_cache = function menuBasketCache() {
+  const basketElement = document.getElementById('menu_basket');
+  if (!basketElement) return;
+  const hideBasketCounter = 22;
+  const listBasketCounter = 10;
+  if (iaiGet?.data?.Basket && iaiGet.reInit) {
+    iaiGet.reInit(['Basket']);
+    return;
+  }
+  iaiGet.basket((json) => {
+    basketElement.classList.remove('--skeleton');
+    const { Basket: { response: { basket } = {} } = {} } = json || {};
+    if (!basket) return;
+    app_shop.vars.basket = basket;
+    const { products = [], user = {} } = basket;
+    app_shop.vars.user = user;
+    basketElement.classList.toggle('--hide', (!products.length || products.length > hideBasketCounter));
+    basketElement.classList.toggle('--list', (products.length > listBasketCounter));
+
+    // cena
+    const sumPriceElement = basketElement.querySelector('.topBasket__price');
+    if (sumPriceElement) {
+      const { worth_net_formatted: netPrice, worth_formatted: price } = basket;
+      sumPriceElement.innerHTML = (app_shop.vars.priceType === 'net') ? netPrice : price;
+    }
+
+    // badge
+    const badgeElement = basketElement.querySelector('.badge');
+    if (badgeElement) {
+      const { productsCounter = 0 } = basket;
+      badgeElement.innerHTML = (productsCounter > 0) ? productsCounter : '';
+    }
+
+    // koszt dostawy
+    const shippingCostElement = basketElement.querySelector('#shipppingCost');
+    if (shippingCostElement) {
+      const { shippingCost_net_formatted: netPrice, shippingCost_formatted: price } = basket;
+      shippingCostElement.innerHTML = (app_shop.vars.priceType === 'net') ? netPrice : price;
+    }
+
+    // darmowa dostawa w top
+    const freeShippingElement = document.getElementById('freeShipping');
+    if (freeShippingElement) {
+      const { toShippingFree } = basket;
+      freeShippingElement.classList.toggle('--active', +toShippingFree === 0);
+    }
+
+    if (!products.length) {
+      if (typeof app_shop.fn.afterBasketCallback === 'function') app_shop.fn.afterBasketCallback(basket);
+      return;
+    }
+
+    // produkty
+    let html = '';
+    products.forEach((product) => {
+      html += app_shop.fn.customBasket(product);
+    });
+    const productsElement = basketElement.querySelector('.topBasket__block.--products');
+    if (productsElement) {
+      productsElement.innerHTML = html;
+    }
+
+    // ukrycie 1-Click
+    const oneClickHide = products.find((el) => el.name === '' || el.subscription_period !== '0');
+    basketElement.classList.toggle('--oneclick-hide', !!oneClickHide);
+
+    const detailsElements = document.querySelectorAll('.topBasket__details');
+    detailsElements.forEach((el) => {
+      el.removeAttribute('style');
+    });
+    if (typeof app_shop.fn.afterBasketCallback === 'function') app_shop.fn.afterBasketCallback(basket);
+  });
+};
+
+const menu_basket_cache = app_shop.fn.menu_basket_cache;
+
+app_shop.run(() => {
+  app_shop.fn.menu_basket_cache();
+}, 'all', '#menu_basket');

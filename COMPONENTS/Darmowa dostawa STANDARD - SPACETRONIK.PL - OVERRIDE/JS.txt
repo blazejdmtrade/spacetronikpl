@@ -1,0 +1,52 @@
+app_shop.txt['txt_118559_6'] = "";
+app_shop.txt['txt_118559_6'] ? '' : app_shop.txt['txt_118559_6'] = 1;
+app_shop.run(() => {
+  ($.cookie('freeeshipping_clicked') === null) && ( Boolean(document.querySelector('#freeShipping')) ) 
+  ?  $('html').addClass('--freeShipping')
+  :  ($('#freeShipping').remove() , $('html').removeClass('--freeShipping'));
+
+  $('#freeShipping .freeShipping__close').on('click' , function hideFreeShippingBar(e) {
+    e.preventDefault();
+    $.cookie('freeeshipping_clicked', true, {
+      expires: parseInt(app_shop.txt['txt_118559_6'])
+    });
+    $('#freeShipping').remove();
+    $('html').removeClass('--freeShipping');
+    return false;
+  })
+
+} , 'all' , '.--freeShipping');
+
+
+
+
+
+$('#black-free-shipping-bar-slider').slick({
+        slidesToShow: 3,
+        autoplay: true,
+        autoplaySpeed: 0,
+        speed: 20000,
+        cssEase:'linear',
+        infinite: true,
+        focusOnSelect: false,
+        arrows: false,
+        responsive: [{
+            breakpoint: 1250,
+            settings: {
+                arrows: false,
+                slidesToShow: 2
+            }
+        },{
+            breakpoint: 978,
+            settings: {
+                arrows: false,
+                slidesToShow: 2
+            }
+        }, {
+            breakpoint: 480,
+            settings: {
+                arrows: false,
+                slidesToShow: 1
+            }
+        }]
+    });
